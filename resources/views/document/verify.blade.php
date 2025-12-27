@@ -5,8 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-sm border-0" style="border-radius: 20px;">
-                <div class="card-body p-5">
-                    <div class="text-center mb-5">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4 mb-md-5">
                         <div class="text-success mb-3">
                             <i class="fas fa-check-circle fa-4x"></i>
                         </div>
@@ -14,7 +14,7 @@
                         <p class="text-muted">This document is authentic and the digital signature is valid.</p>
                     </div>
 
-                    <div class="document-details bg-light rounded-xl p-4 mb-5" style="border-radius: 16px;">
+                    <div class="document-details bg-light rounded-xl p-3 p-md-4 mb-4 mb-md-5" style="border-radius: 16px;">
                         <h5 class="font-weight-bold mb-4 text-dark border-bottom pb-3">
                             <i class="fas fa-info-circle mr-2 text-primary"></i> Document Details
                         </h5>
@@ -43,7 +43,7 @@
 
                         <div class="detail-row mb-3 d-flex flex-wrap">
                             <div class="col-sm-4 text-muted font-weight-bold px-0">Signed At:</div>
-                            <div class="col-sm-8 text-dark px-0 font-italic">{{ $document->updated_at->format('l, d F Y - H:i:s') }}</div>
+                            <div class="col-sm-8 text-dark px-0 font-italic">{{ $document->updated_at->timezone('Asia/Jakarta')->format('l, d F Y - H:i:s') }}</div>
                         </div>
 
                         <div class="detail-row mb-0 d-flex flex-wrap">

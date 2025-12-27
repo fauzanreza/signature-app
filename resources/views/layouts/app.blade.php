@@ -143,6 +143,14 @@
             justify-content: center;
             padding: 2rem 0;
         }
+
+        /* Responsive Width Utilities */
+        @media (min-width: 768px) {
+            .w-md-auto { width: auto !important; }
+        }
+        @media (min-width: 992px) {
+            .w-lg-auto { width: auto !important; }
+        }
     </style>
     @stack('styles')
 </head>

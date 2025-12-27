@@ -54,12 +54,22 @@
     height: 100%;
     background: #f8f9fa;
 }
+
+/* Hide number input spinners */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
 </style>
 
 <div class="container-fluid">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="font-weight-bold text-dark mb-0">Position QR Code</h2>
-        <a href="{{ route('dashboard') }}" class="btn btn-light text-muted font-weight-bold shadow-sm">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+        <h2 class="font-weight-bold text-dark mb-3 mb-md-0">Position QR Code</h2>
+        <a href="{{ route('dashboard') }}" class="btn btn-light text-muted font-weight-bold shadow-sm w-100 w-md-auto">
             <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
         </a>
     </div>
@@ -69,13 +79,17 @@
             <div class="card shadow border-0 mb-4">
                 <!-- PDF Controls -->
                 <div class="card-header bg-white border-bottom py-3">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
                         <!-- Page Navigation -->
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center mb-3 mb-md-0">
                             <button type="button" class="btn btn-sm btn-outline-secondary" id="prevPage">
                                 <i class="fas fa-chevron-left"></i>
                             </button>
-                            <span class="font-weight-bold mx-3" id="pageInfo">Page 1 of 1</span>
+                            <div class="d-flex align-items-center mx-2">
+                                <span class="small mr-2 text-muted">Page</span>
+                                <input type="number" id="pageInput" class="form-control form-control-sm text-center font-weight-bold px-1" value="1" min="1" style="width: 50px; border-radius: 6px;">
+                                <span class="small ml-2 text-muted" id="totalPagesInfo">of 1</span>
+                            </div>
                             <button type="button" class="btn btn-sm btn-outline-secondary" id="nextPage">
                                 <i class="fas fa-chevron-right"></i>
                             </button>
@@ -86,7 +100,12 @@
                             <button type="button" class="btn btn-sm btn-outline-secondary" id="zoomOut">
                                 <i class="fas fa-search-minus"></i>
                             </button>
-                            <span class="font-weight-bold mx-3" id="zoomInfo">100%</span>
+                            <div class="input-group input-group-sm mx-2" style="width: 90px;">
+                                <input type="number" id="zoomInput" class="form-control text-center font-weight-bold px-1" value="100" min="50" max="200" style="border-radius: 6px 0 0 6px;">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-white small px-2" style="border-radius: 0 6px 6px 0;">%</span>
+                                </div>
+                            </div>
                             <button type="button" class="btn btn-sm btn-outline-secondary" id="zoomIn">
                                 <i class="fas fa-search-plus"></i>
                             </button>
@@ -140,9 +159,14 @@
                         <label class="font-weight-bold text-dark mb-3">
                             <i class="fas fa-expand mr-2"></i>QR Size
                         </label>
-                        <input type="range" class="custom-range" min="30" max="200" value="50" id="qrSize">
-                        <div class="text-center mt-2">
-                            <span class="font-weight-bold text-primary" id="sizeValue">50px</span>
+                        <div class="d-flex align-items-center">
+                            <input type="range" class="custom-range mr-3" min="30" max="200" value="50" id="qrSize">
+                            <div class="input-group input-group-sm" style="width: 95px;">
+                                <input type="number" id="qrSizeInput" class="form-control text-center font-weight-bold text-primary border-primary px-1" value="50" min="30" max="200" style="border-radius: 8px 0 0 8px; height: 31px;">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-white border-primary text-primary small px-2" style="border-radius: 0 8px 8px 0; font-size: 0.7rem; height: 31px;">px</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
@@ -150,7 +174,7 @@
                     
 
                     <div class="text-center">
-                        <button class="btn btn-sm btn-success shadow-sm px-4 py-2 font-weight-bold" id="generateQr" style="border-radius: 8px;">
+                        <button class="btn btn-sm btn-primary shadow-sm px-4 py-2 font-weight-bold" id="generateQr" style="border-radius: 8px;">
                             <i class="fas fa-stamp mr-2"></i> Stamp Document
                         </button>
                     </div>
@@ -260,10 +284,11 @@
     }
     
     function updateControls() {
-        document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${totalPages}`;
+        document.getElementById('pageInput').value = currentPage;
+        document.getElementById('totalPagesInfo').textContent = `of ${totalPages}`;
         document.getElementById('prevPage').disabled = currentPage === 1;
         document.getElementById('nextPage').disabled = currentPage === totalPages;
-        document.getElementById('zoomInfo').textContent = Math.round(zoom * 100) + '%';
+        document.getElementById('zoomInput').value = Math.round(zoom * 100);
     }
     
     function makeDraggable(element, container) {
@@ -351,6 +376,24 @@
             renderPage(currentPage);
         }
     });
+
+    // Page Input Manual Entry
+    document.getElementById('pageInput').addEventListener('change', function() {
+        let val = parseInt(this.value);
+        if (isNaN(val) || val < 1) val = 1;
+        if (val > totalPages) val = totalPages;
+        currentPage = val;
+        renderPage(currentPage);
+    });
+
+    // Zoom Input Manual Entry
+    document.getElementById('zoomInput').addEventListener('change', function() {
+        let val = parseInt(this.value);
+        if (isNaN(val) || val < 50) val = 50;
+        if (val > 200) val = 200;
+        zoom = val / 100;
+        renderPage(currentPage);
+    });
     
     // Slider controls
     document.getElementById('qrXPosition').addEventListener('input', function() {
@@ -375,17 +418,42 @@
         }
     });
 
-    document.getElementById('qrSize').addEventListener('input', function() {
-        const size = this.value;
-        document.getElementById('sizeValue').textContent = size + 'px';
+    // QR Size sync (Slider & Input)
+    const qrSizeSlider = document.getElementById('qrSize');
+    const qrSizeInput = document.getElementById('qrSizeInput');
+
+    function updateQrSize(size) {
+        qrSizeSlider.value = size;
+        qrSizeInput.value = size;
         
         if (qrIndicator) {
             qrIndicator.style.width = size + 'px';
             qrIndicator.style.height = size + 'px';
             const qrBox = qrIndicator.querySelector('.qr-box');
-            qrBox.style.width = size + 'px';
-            qrBox.style.height = size + 'px';
+            if (qrBox) {
+                qrBox.style.width = size + 'px';
+                qrBox.style.height = size + 'px';
+            }
         }
+    }
+
+    qrSizeSlider.addEventListener('input', function() {
+        updateQrSize(this.value);
+    });
+
+    qrSizeInput.addEventListener('input', function() {
+        let val = parseInt(this.value);
+        if (isNaN(val)) return;
+        // Allow typing but clamp on blur or if it exceeds max significantly
+        if (val > 500) val = 500; 
+        updateQrSize(val);
+    });
+
+    qrSizeInput.addEventListener('blur', function() {
+        let val = parseInt(this.value);
+        if (isNaN(val) || val < 30) val = 30;
+        if (val > 500) val = 500;
+        updateQrSize(val);
     });
     
 

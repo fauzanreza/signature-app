@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="font-weight-bold text-dark">Manage Signers</h2>
-        <a href="{{ route('signer.create') }}" class="btn btn-sm btn-primary shadow-sm px-3">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+        <h2 class="font-weight-bold text-dark mb-3 mb-md-0">Manage Signers</h2>
+        <a href="{{ route('signer.create') }}" class="btn btn-sm btn-primary shadow-sm px-3 w-100 w-md-auto">
             <i class="fas fa-plus mr-2"></i> Add New Signer
         </a>
     </div>

@@ -8,8 +8,8 @@ https://fauzanreza.site/ -->
 
 @section('content')
 <div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-5">
-        <div>
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 mb-md-5">
+        <div class="mb-3 mb-md-0 text-center text-md-left">
             <h2 class="font-weight-bold text-dark mb-1">Dashboard</h2>
             <p class="text-muted mb-0">Manage and track your documents</p>
         </div>
@@ -42,14 +42,16 @@ https://fauzanreza.site/ -->
 
     <div class="card shadow-sm border-0">
         <div class="card-header bg-white border-0 py-4 px-4">
-            <div class="d-flex justify-content-between align-items-center">
-                <h5 class="mb-0 font-weight-bold text-dark"><i class="fas fa-folder-open mr-2 text-primary"></i> My Documents</h5>
+            <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center">
+                <h5 class="mb-3 mb-lg-0 font-weight-bold text-dark"><i class="fas fa-folder-open mr-2 text-primary"></i> Document History</h5>
                 
-                <form action="{{ route('dashboard') }}" method="GET" class="d-flex align-items-center">
+                <form action="{{ route('dashboard') }}" method="GET" class="d-flex flex-column flex-md-row align-items-center w-100 w-lg-auto">
                     @if(request('role') || request('year') || request('search'))
-                        <a href="{{ route('dashboard') }}" class="text-muted small mr-3 font-weight-bold">Clear Filters</a>
+                        <div class="mb-3 mb-md-0 mr-md-3">
+                            <a href="{{ route('dashboard') }}" class="text-muted small font-weight-bold">Clear Filters</a>
+                        </div>
                     @endif
-                    <div class="filter-group d-flex mr-3">
+                    <div class="filter-group d-flex mb-3 mb-md-0 mr-md-3 w-100 w-md-auto justify-content-center">
                         <select name="role" class="form-control border bg-light mr-2 custom-select-minimal" style="border-radius: 10px; font-size: 0.85rem; width: 130px; height: 40px; border-color: #e5e7eb !important;" onchange="this.form.submit()">
                             <option value="">All Roles</option>
                             @foreach($roles as $role)
@@ -65,7 +67,7 @@ https://fauzanreza.site/ -->
                         </select>
                     </div>
 
-                    <div class="search-wrapper" style="width: 280px; position: relative;">
+                    <div class="search-wrapper w-100" style="position: relative; max-width: 300px;">
                         <i class="fas fa-search text-muted" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); z-index: 10;"></i>
                         <input type="text" name="search" class="form-control border bg-light pl-5" placeholder="Search documents..." value="{{ request('search') }}" style="border-radius: 12px; font-size: 0.9rem; height: 40px; box-shadow: none; border-color: #e5e7eb !important;">
                     </div>

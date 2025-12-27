@@ -9,7 +9,7 @@
                     <h4 class="mb-0 font-weight-bold text-dark"><i class="fas fa-file-upload mr-2 text-primary"></i> Upload Document</h4>
                 </div>
                 
-                <div class="card-body p-5">
+                <div class="card-body p-4 p-md-5">
                     <form action="{{ route('document.upload') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         
@@ -65,11 +65,11 @@
                             @enderror
                         </div>
                         
-                        <div class="d-flex justify-content-between align-items-center mt-5">
-                            <a href="{{ route('dashboard') }}" class="btn btn-light text-muted font-weight-bold px-4">
+                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-5">
+                            <a href="{{ route('dashboard') }}" class="btn btn-light text-muted font-weight-bold px-4 w-100 w-md-auto mb-3 mb-md-0 order-2 order-md-1">
                                 <i class="fas fa-arrow-left mr-1"></i> Cancel
                             </a>
-                            <button type="submit" class="btn btn-primary btn-sm shadow-sm px-4 font-weight-bold" style="border-radius: 8px;">
+                            <button type="submit" class="btn btn-primary btn-sm shadow-sm px-4 font-weight-bold w-100 w-md-auto order-1 order-md-2" style="border-radius: 8px;">
                                 Next: Position QR <i class="fas fa-arrow-right ml-2"></i>
                             </button>
                         </div>

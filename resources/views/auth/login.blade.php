@@ -8,8 +8,8 @@
         <div class="visual-content d-flex flex-column align-items-center justify-content-center h-100 text-center p-5">
             <div class="branding-hero mb-5">
                 <div class="logo-wrapper mb-4 d-flex justify-content-center">
-    <img src="{{ asset('images/logo-qr.png') }}" alt="Logo" class="img-fluid" style="height: 60px; filter: brightness(0) invert(1);">
-</div>
+                    <img src="{{ asset('images/logo-qr.png') }}" alt="Logo" class="img-fluid" style="height: 60px; filter: brightness(0) invert(1);">
+                </div>
                 <h1 class="text-white font-weight-bold display-4 mb-3">Digital Signature</h1>
                 <p class="text-white-50 lead mx-auto" style="max-width: 450px;">The most secure and efficient way to manage and sign your professional documents digitally.</p>
             </div>
@@ -263,16 +263,18 @@
         }
         .login-visual-section {
             flex: none;
-            height: 40vh;
-            padding: 40px;
+            min-height: 40vh;
+            padding: 40px 20px;
         }
         .login-form-section {
             flex: none;
-            padding: 40px;
+            padding: 20px;
+            background: transparent;
         }
         .login-card {
-            margin-top: -60px;
+            margin-top: -40px;
             z-index: 10;
+            margin-bottom: 40px;
         }
         body, html {
             overflow: auto;
