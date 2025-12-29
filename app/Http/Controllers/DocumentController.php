@@ -55,7 +55,7 @@ class DocumentController extends Controller {
     
     public function upload(Request $request) {
         $validated = $request->validate([
-            'pdf_file' => 'required|mimes:pdf|max:10000',
+            'pdf_file' => 'required|mimes:pdf|max:20480',
             'signer_id' => 'required|exists:signers,id',
             'document_number' => 'required|string|max:255',
         ]);

@@ -63,6 +63,11 @@
                                                 </span>
                                             </div>
                                             <input id="password" type="password" class="form-control form-control-lg border-left-0 @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="••••••••" style="font-size: 0.95rem; background-color: #f9fafb;">
+                                            <div class="input-group-append">
+                                                <span class="password-toggle" data-target="#password">
+                                                    <i class="far fa-eye text-muted"></i>
+                                                </span>
+                                            </div>
                                         </div>
                                         @error('password')
                                             <span class="invalid-feedback d-block" role="alert">
@@ -81,6 +86,11 @@
                                                 </span>
                                             </div>
                                             <input id="password-confirm" type="password" class="form-control form-control-lg border-left-0" name="password_confirmation" required autocomplete="new-password" placeholder="••••••••" style="font-size: 0.95rem; background-color: #f9fafb;">
+                                            <div class="input-group-append">
+                                                <span class="password-toggle" data-target="#password-confirm">
+                                                    <i class="far fa-eye text-muted"></i>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -131,5 +141,53 @@
     .form-control:focus {
         background-color: #fff !important;
     }
+
+    .password-toggle {
+        cursor: pointer;
+        transition: all 0.2s;
+        padding: 0 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f9fafb;
+        border: 1px solid #ced4da;
+        border-left: 0;
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+    }
+    .password-toggle:hover i {
+        color: var(--primary-color) !important;
+    }
+    .form-control-lg {
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggles = document.querySelectorAll('.password-toggle');
+    
+    toggles.forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            const inputId = this.getAttribute('data-target');
+            const input = document.querySelector(inputId);
+            
+            if (input) {
+                const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                input.setAttribute('type', type);
+                
+                const icon = this.querySelector('i');
+                if (type === 'text') {
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            }
+        });
+    });
+});
+</script>
 @endsection

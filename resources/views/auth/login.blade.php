@@ -86,12 +86,12 @@
 
                 </form>
 
-                <div class="text-center mt-5">
+                <!-- <div class="text-center mt-5">
                     <p class="text-muted small">
                         Don't have an account? 
                         <a href="{{ route('register') }}" class="text-primary font-weight-bold ml-1">Sign up here</a>
                     </p>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -280,5 +280,46 @@
             overflow: auto;
         }
     }
+
+    .password-toggle {
+        transition: all 0.2s;
+        padding: 5px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .password-toggle:hover {
+        background-color: rgba(0,0,0,0.05);
+    }
+    .password-toggle i {
+        transition: color 0.2s;
+    }
+    .password-toggle:hover i {
+        color: var(--primary-color) !important;
+    }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const passwordToggle = document.querySelector('.password-toggle');
+    const passwordInput = document.querySelector('#password');
+    
+    if (passwordToggle && passwordInput) {
+        passwordToggle.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            const icon = this.querySelector('i');
+            if (type === 'text') {
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    }
+});
+</script>
 @endsection

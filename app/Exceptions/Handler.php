@@ -37,5 +37,13 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+
+        $this->renderable(function (\Illuminate\Session\TokenMismatchException $e, $request) {
+            if ($request->is('document/upload') || $request->is('*/upload')) {
+                return back()->withErrors([
+                    'pdf_file' => 'The page expired or the file is too large. Please refresh and try again with a smaller file.'
+                ])->withInput();
+            }
+        });
     }
 }
