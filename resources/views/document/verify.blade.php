@@ -25,6 +25,11 @@
                         </div>
 
                         <div class="detail-row mb-3 d-flex flex-wrap">
+                            <div class="col-sm-4 text-muted font-weight-bold px-0">Perihal:</div>
+                            <div class="col-sm-8 text-dark px-0 font-weight-bold">{{ $document->perihal ?? 'N/A' }}</div>
+                        </div>
+
+                        <div class="detail-row mb-3 d-flex flex-wrap">
                             <div class="col-sm-4 text-muted font-weight-bold px-0">File Name:</div>
                             <div class="col-sm-8 text-dark px-0">{{ $document->file_name }}</div>
                         </div>

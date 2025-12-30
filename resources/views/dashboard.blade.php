@@ -102,6 +102,9 @@ https://fauzanreza.site/ -->
                                                 @if($doc->document_number)
                                                     <small class="text-muted">{{ $doc->document_number }}</small>
                                                 @endif
+                                                @if($doc->perihal)
+                                                    <small class="text-muted">{{ $doc->perihal }}</small>
+                                                @endif
                                             </div>
                                         </div>
                                     </td>

@@ -58,6 +58,7 @@ class DocumentController extends Controller {
             'pdf_file' => 'required|mimes:pdf|max:20480',
             'signer_id' => 'required|exists:signers,id',
             'document_number' => 'required|string|max:255',
+            'perihal' => 'required|string|max:255',
         ]);
         
         $file = $request->file('pdf_file');
@@ -71,6 +72,7 @@ class DocumentController extends Controller {
             'signer_id' => $signer->id,
             'file_name' => $file->getClientOriginalName(),
             'document_number' => $validated['document_number'],
+            'perihal' => $validated['perihal'],
             'file_path' => $path,
             'role' => $signer->role,
             'status' => 'pending',

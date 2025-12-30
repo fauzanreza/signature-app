@@ -8,7 +8,7 @@ class Document extends Model {
     use HasFactory;
     
     protected $fillable = [
-        'user_id', 'signer_id', 'file_name', 'document_number', 'file_path', 'role',
+        'user_id', 'signer_id', 'file_name', 'document_number', 'perihal', 'file_path', 'role',
         'page_number', 'qr_x', 'qr_y', 'qr_width', 'qr_height',
         'qr_data', 'status'
     ];

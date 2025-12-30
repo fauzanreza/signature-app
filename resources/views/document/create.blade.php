@@ -27,6 +27,19 @@
                         </div>
 
                         <div class="form-group mb-4">
+                            <label for="perihal" class="small font-weight-bold text-muted text-uppercase mb-2">Perihal</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-light" style="border-radius: 10px 0 0 10px;"><i class="fas fa-align-left text-primary"></i></span>
+                                </div>
+                                <input type="text" name="perihal" id="perihal" class="form-control @error('perihal') is-invalid @enderror" value="{{ old('perihal') }}" required placeholder="e.g. Undangan Rapat" style="height: auto; min-height: 45px; border-radius: 0 10px 10px 0;">
+                            </div>
+                            @error('perihal')
+                                <small class="text-danger font-weight-bold mt-1 d-block">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-4">
                             <label for="signer_id" class="small font-weight-bold text-muted text-uppercase mb-2">Select Signer</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
