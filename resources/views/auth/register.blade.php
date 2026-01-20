@@ -97,6 +97,28 @@
                             </div>
 
                             <div class="form-group mb-4">
+                                <label for="role" class="small font-weight-bold text-muted text-uppercase mb-2">Account Role</label>
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-light border-right-0">
+                                            <i class="fas fa-user-tag text-muted"></i>
+                                        </span>
+                                    </div>
+                                    <select id="role" name="role" class="form-control form-control-lg border-left-0 @error('role') is-invalid @enderror" required style="font-size: 0.95rem; background-color: #f9fafb;">
+                                        <option value="" disabled selected>Select your role</option>
+                                        <option value="director" {{ old('role') == 'director' ? 'selected' : '' }}>Director</option>
+                                        <option value="kaur" {{ old('role') == 'kaur' ? 'selected' : '' }}>Kaur</option>
+                                        <option value="approver" {{ old('role') == 'approver' ? 'selected' : '' }}>Approver</option>
+                                    </select>
+                                </div>
+                                @error('role')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group mb-4">
                                 <div class="custom-control custom-checkbox">
                                     <input class="custom-control-input" type="checkbox" name="terms" id="terms" required>
                                     <label class="custom-control-label small text-muted font-weight-medium" for="terms">

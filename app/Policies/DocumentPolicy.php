@@ -30,7 +30,8 @@ class DocumentPolicy
      */
     public function view(User $user, Document $document)
     {
-        return $user->id === $document->user_id;
+        // Owner can view, or administrative roles can view all
+        return $user->id === $document->user_id || in_array($user->role, ['director', 'kaur', 'approver']);
     }
 
     /**
@@ -53,7 +54,8 @@ class DocumentPolicy
      */
     public function update(User $user, Document $document)
     {
-        return $user->id === $document->user_id;
+        // Owner can update, or administrative roles can update all
+        return $user->id === $document->user_id || in_array($user->role, ['director', 'kaur', 'approver']);
     }
 
     /**

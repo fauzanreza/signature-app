@@ -31,8 +31,7 @@ class SignerPolicy
      */
     public function create(User $user)
     {
-        // Only director or kaur can manage signers
-        return in_array($user->role, ['director', 'kaur']);
+        return true;
     }
 
     /**
@@ -40,7 +39,7 @@ class SignerPolicy
      */
     public function update(User $user, Signer $signer)
     {
-        return in_array($user->role, ['director', 'kaur']);
+        return true;
     }
 
     /**
@@ -48,6 +47,6 @@ class SignerPolicy
      */
     public function delete(User $user, Signer $signer)
     {
-        return in_array($user->role, ['director', 'kaur']);
+        return true;
     }
 }
