@@ -20,40 +20,40 @@
                         </h5>
                         
                         <div class="detail-row mb-3 d-flex flex-wrap">
-                            <div class="col-sm-4 text-muted font-weight-bold px-0">Nomor Surat:</div>
-                            <div class="col-sm-8 text-dark px-0 font-weight-bold">{{ $document->document_number ?? 'N/A' }}</div>
+                            <div class="col-12 col-sm-4 text-muted font-weight-bold px-0 mb-1 mb-sm-0">Nomor Surat:</div>
+                            <div class="col-12 col-sm-8 text-dark px-0 font-weight-bold">{{ $document->document_number ?? 'N/A' }}</div>
                         </div>
 
                         <div class="detail-row mb-3 d-flex flex-wrap">
-                            <div class="col-sm-4 text-muted font-weight-bold px-0">Perihal:</div>
-                            <div class="col-sm-8 text-dark px-0 font-weight-bold">{{ $document->perihal ?? 'N/A' }}</div>
+                            <div class="col-12 col-sm-4 text-muted font-weight-bold px-0 mb-1 mb-sm-0">Perihal:</div>
+                            <div class="col-12 col-sm-8 text-dark px-0 font-weight-bold">{{ $document->perihal ?? 'N/A' }}</div>
                         </div>
 
                         <div class="detail-row mb-3 d-flex flex-wrap">
-                            <div class="col-sm-4 text-muted font-weight-bold px-0">File Name:</div>
-                            <div class="col-sm-8 text-dark px-0">{{ $document->file_name }}</div>
+                            <div class="col-12 col-sm-4 text-muted font-weight-bold px-0 mb-1 mb-sm-0">File Name:</div>
+                            <div class="col-12 col-sm-8 text-dark px-0">{{ $document->file_name }}</div>
                         </div>
 
                         <div class="detail-row mb-3 d-flex flex-wrap">
-                            <div class="col-sm-4 text-muted font-weight-bold px-0">Signer Name:</div>
-                            <div class="col-sm-8 text-dark px-0 font-weight-bold text-primary">{{ $document->signer ? $document->signer->name : 'N/A' }}</div>
+                            <div class="col-12 col-sm-4 text-muted font-weight-bold px-0 mb-1 mb-sm-0">Signer Name:</div>
+                            <div class="col-12 col-sm-8 text-dark px-0 font-weight-bold text-primary">{{ $document->signer ? $document->signer->name : 'N/A' }}</div>
                         </div>
 
                         <div class="detail-row mb-3 d-flex flex-wrap align-items-center">
-                            <div class="col-sm-4 text-muted font-weight-bold px-0">Signer Role:</div>
-                            <div class="col-sm-8 px-0">
-                                <span class="badge bg-primary text-white px-3 py-2" style="border-radius: 6px; font-size: 0.85rem;">{{ $document->role }}</span>
+                            <div class="col-12 col-sm-4 text-muted font-weight-bold px-0 mb-1 mb-sm-0">Signer Role:</div>
+                            <div class="col-12 col-sm-8 px-0">
+                                <span class="badge bg-primary text-white px-3 py-2 text-wrap text-left" style="border-radius: 6px; font-size: 0.85rem; line-height: 1.4; max-width: 100%;">{{ $document->role }}</span>
                             </div>
                         </div>
 
                         <div class="detail-row mb-3 d-flex flex-wrap">
-                            <div class="col-sm-4 text-muted font-weight-bold px-0">Signed At:</div>
-                            <div class="col-sm-8 text-dark px-0 font-italic">{{ $document->updated_at->timezone('Asia/Jakarta')->format('l, d F Y - H:i:s') }}</div>
+                            <div class="col-12 col-sm-4 text-muted font-weight-bold px-0 mb-1 mb-sm-0">Signed At:</div>
+                            <div class="col-12 col-sm-8 text-dark px-0 font-italic">{{ $document->updated_at->timezone('Asia/Jakarta')->format('l, d F Y - H:i:s') }}</div>
                         </div>
 
                         <div class="detail-row mb-0 d-flex flex-wrap">
-                            <div class="col-sm-4 text-muted font-weight-bold px-0">Verification Status:</div>
-                            <div class="col-sm-8 px-0">
+                            <div class="col-12 col-sm-4 text-muted font-weight-bold px-0 mb-1 mb-sm-0">Verification Status:</div>
+                            <div class="col-12 col-sm-8 px-0">
                                 <span class="text-success font-weight-bold">
                                     <i class="fas fa-check-double mr-1"></i> Authentic & Valid
                                 </span>

@@ -200,6 +200,70 @@ https://fauzanreza.site/ -->
         background-size: 12px 10px;
         padding-right: 2rem !important;
     }
+
+    /* Custom Pagination Styles */
+    .pagination {
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .pagination .page-link {
+        border-radius: 8px !important;
+        margin: 0 3px;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        color: #4b5563;
+        border: 1px solid #e5e7eb;
+        background-color: #fff;
+        transition: all 0.2s ease;
+        box-shadow: none;
+    }
+    
+    .pagination .page-item.active .page-link {
+        background-color: #9e1520 !important;
+        border-color: #9e1520 !important;
+        color: #fff !important;
+        font-weight: 600;
+    }
+    
+    .pagination .page-link:hover {
+        background-color: #f9fafb;
+        border-color: #d1d5db;
+        color: #111827;
+    }
+    
+    .pagination .page-item.disabled .page-link {
+        background-color: #f9fafb;
+        border-color: #f3f4f6;
+        color: #9ca3af;
+    }
+
+    /* Target the specific Prev/Next items in Bootstrap pagination */
+    .pagination .page-item:first-child .page-link,
+    .pagination .page-item:last-child .page-link {
+        font-weight: 500;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    /* Hide any default SVG icons that might still appear */
+    .pagination svg {
+        display: none !important;
+    }
+
+    /* Ensure only one pagination mode is visible (Bootstrap default) */
+    .pagination-wrapper {
+        display: block !important;
+    }
+    
+    /* Mobile adjustments */
+    @media (max-width: 576px) {
+        .pagination .page-link {
+            padding: 0.4rem 0.75rem;
+            margin: 0 2px;
+        }
+    }
 </style>
 @endpush
 @endsection
