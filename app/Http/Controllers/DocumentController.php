@@ -62,8 +62,10 @@ class DocumentController extends Controller {
         ]);
         
         $file = $request->file('pdf_file');
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $path = $file->storeAs('pdfs', $filename, 'public');
+        $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $extension = $file->getClientOriginalExtension();
+        $safeName = \Illuminate\Support\Str::slug($originalName) . '_' . time() . '.' . $extension;
+        $path = $file->storeAs('pdfs', $safeName, 'public');
         
         $signer = Signer::find($validated['signer_id']);
         

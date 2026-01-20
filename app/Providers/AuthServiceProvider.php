@@ -14,6 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Models\Document' => 'App\Policies\DocumentPolicy',
+        'App\Models\Signer' => 'App\Policies\SignerPolicy',
     ];
 
     /**

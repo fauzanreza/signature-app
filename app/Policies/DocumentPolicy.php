@@ -30,7 +30,7 @@ class DocumentPolicy
      */
     public function view(User $user, Document $document)
     {
-        return true;
+        return $user->id === $document->user_id;
     }
 
     /**
@@ -53,7 +53,7 @@ class DocumentPolicy
      */
     public function update(User $user, Document $document)
     {
-        return true;
+        return $user->id === $document->user_id;
     }
 
     /**
