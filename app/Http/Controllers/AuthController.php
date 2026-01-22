@@ -12,17 +12,17 @@ class AuthController extends Controller {
     }
     
     public function login(Request $request) {
-        $validated = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-        
-        if (Auth::attempt($validated)) {
+        $login = $request->input('login');
+        $password = $request->input('password');
+
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        if (Auth::attempt([$field => $login, 'password' => $password])) {
             $request->session()->regenerate();
             return redirect()->route('dashboard');
         }
         
-        return back()->withErrors(['email' => 'Invalid credentials']);
+        return back()->withErrors(['login' => 'Invalid credentials']);
     }
     
     public function showRegister() {
@@ -32,6 +32,7 @@ class AuthController extends Controller {
     public function register(Request $request) {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
             'email' => 'required|email|unique:users',
             'role' => 'required|in:director,kaur,approver',
             'password' => 'required|string|min:8|confirmed',
@@ -39,6 +40,7 @@ class AuthController extends Controller {
         
         User::create([
             'name' => $validated['name'],
+            'username' => $validated['username'],
             'email' => $validated['email'],
             'role' => $validated['role'],
             'password' => Hash::make($validated['password']),

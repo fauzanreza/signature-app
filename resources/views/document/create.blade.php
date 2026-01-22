@@ -39,6 +39,7 @@
                             @enderror
                         </div>
 
+                        @if(Auth::user()->role === 'admin')
                         <div class="form-group mb-4">
                             <label for="signer_id" class="small font-weight-bold text-muted text-uppercase mb-2">Select Signer</label>
                             <div class="input-group">
@@ -63,6 +64,21 @@
                                 </a>
                             </div>
                         </div>
+                        @else
+                        <div class="form-group mb-4">
+                            <label class="small font-weight-bold text-muted text-uppercase mb-2">Role</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-light" style="border-radius: 10px 0 0 10px;"><i class="fas fa-user-tag text-primary"></i></span>
+                                </div>
+                                <input type="text" class="form-control" value="{{ Auth::user()->signer->role ?? 'No Role Assigned' }}" readonly style="height: auto; min-height: 45px; border-radius: 0 10px 10px 0; background-color: #f8f9fa;">
+                                <input type="hidden" name="signer_id" value="{{ Auth::user()->signer->id ?? '' }}">
+                            </div>
+                            @if(!Auth::user()->signer)
+                                <small class="text-danger font-weight-bold mt-1 d-block">Warning: Your account is not linked to a signer record. Please contact admin.</small>
+                            @endif
+                        </div>
+                        @endif
                         
                         <div class="form-group mb-4">
                             <label for="pdf_file" class="small font-weight-bold text-muted text-uppercase mb-2">PDF Document</label>

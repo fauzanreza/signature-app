@@ -26,6 +26,7 @@
                         <tr>
                             <th class="border-0 px-4 py-3">Name</th>
                             <th class="border-0 px-4 py-3">Role</th>
+                            <th class="border-0 px-4 py-3">Email</th>
                             <th class="border-0 px-4 py-3">Created At</th>
                             <th class="border-0 px-4 py-3 text-right">Actions</th>
                         </tr>
@@ -39,6 +40,7 @@
                                         {{ $signer->role }}
                                     </span>
                                 </td>
+                                <td class="px-4 py-3 text-muted">{{ $signer->user->email ?? 'N/A' }}</td>
                                 <td class="px-4 py-3 text-muted">{{ $signer->created_at->format('M d, Y') }}</td>
                                 <td class="px-4 py-3 text-right">
                                     <div class="btn-group">
@@ -57,7 +59,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="text-center py-5 text-muted">
+                                <td colspan="5" class="text-center py-5 text-muted">
                                     <i class="fas fa-users fa-3x mb-3 opacity-25"></i>
                                     <p>No signers found. Start by adding one!</p>
                                 </td>

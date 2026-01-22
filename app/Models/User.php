@@ -9,7 +9,7 @@ class User extends Authenticatable {
     use HasFactory;
     
     protected $fillable = [
-        'name', 'email', 'role', 'password',
+        'name', 'username', 'email', 'role', 'password',
     ];
     
     protected $hidden = [
@@ -18,5 +18,9 @@ class User extends Authenticatable {
     
     public function documents() {
         return $this->hasMany(Document::class);
+    }
+    
+    public function signer() {
+        return $this->hasOne(Signer::class);
     }
 }

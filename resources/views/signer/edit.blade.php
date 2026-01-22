@@ -37,8 +37,43 @@
                             @enderror
                         </div>
 
+                        <div class="form-group mb-4">
+                            <label for="username" class="small font-weight-bold text-muted text-uppercase mb-2">Username</label>
+                            <input type="text" name="username" id="username" class="form-control form-control-lg @error('username') is-invalid @enderror" value="{{ old('username', $signer->user->username ?? '') }}" required placeholder="e.g. johndoe">
+                            @error('username')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="email" class="small font-weight-bold text-muted text-uppercase mb-2">Email Address</label>
+                            <input type="email" name="email" id="email" class="form-control form-control-lg @error('email') is-invalid @enderror" value="{{ old('email', $signer->user->email ?? '') }}" required placeholder="e.g. john.doe@example.com">
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="password" class="small font-weight-bold text-muted text-uppercase mb-2">Password <small class="text-muted">(Leave blank to keep current)</small></label>
+                            <input type="password" name="password" id="password" class="form-control form-control-lg @error('password') is-invalid @enderror" placeholder="Minimum 8 characters">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="password_confirmation" class="small font-weight-bold text-muted text-uppercase mb-2">Confirm Password</label>
+                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control form-control-lg" placeholder="Re-type password">
+                        </div>
+
                         <button type="submit" class="btn btn-primary btn-sm btn-block font-weight-bold py-2 shadow-sm" style="border-radius: 8px;">
-                            <i class="fas fa-save mr-2"></i> Update Signer
+                            <i class="fas fa-save mr-2"></i> Update Signer Account
                         </button>
                     </form>
                 </div>

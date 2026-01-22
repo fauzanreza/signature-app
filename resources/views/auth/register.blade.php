@@ -36,6 +36,23 @@
                             </div>
 
                             <div class="form-group mb-4">
+                                <label for="username" class="small font-weight-bold text-muted text-uppercase mb-2">Username</label>
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-light border-right-0">
+                                            <i class="fas fa-at text-muted"></i>
+                                        </span>
+                                    </div>
+                                    <input id="username" type="text" class="form-control form-control-lg border-left-0 @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" placeholder="johndoe" style="font-size: 0.95rem; background-color: #f9fafb;">
+                                </div>
+                                @error('username')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group mb-4">
                                 <label for="email" class="small font-weight-bold text-muted text-uppercase mb-2">Email Address</label>
                                 <div class="input-group input-group-merge">
                                     <div class="input-group-prepend">

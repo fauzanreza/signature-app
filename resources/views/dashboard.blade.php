@@ -14,9 +14,11 @@ https://fauzanreza.site/ -->
             <p class="text-muted mb-0">Manage and track your documents</p>
         </div>
         <div class="d-flex">
+            @if(Auth::user()->role === 'admin')
             <a href="{{ route('signer.index') }}" class="btn btn-sm btn-outline-primary shadow-sm px-3 mr-2">
                 <i class="fas fa-users-cog mr-2"></i> Manage Signers
             </a>
+            @endif
             <a href="{{ route('document.create') }}" class="btn btn-sm btn-primary shadow-sm px-3">
                 <i class="fas fa-plus-circle mr-2"></i> Upload Document
             </a>
@@ -52,12 +54,14 @@ https://fauzanreza.site/ -->
                         </div>
                     @endif
                     <div class="filter-group d-flex mb-3 mb-md-0 mr-md-3 w-100 w-md-auto justify-content-center">
+                        @if(Auth::user()->role === 'admin')
                         <select name="role" class="form-control border bg-light mr-2 custom-select-minimal" style="border-radius: 10px; font-size: 0.85rem; width: 130px; height: 40px; border-color: #e5e7eb !important;" onchange="this.form.submit()">
                             <option value="">All Roles</option>
                             @foreach($roles as $role)
                                 <option value="{{ $role }}" {{ request('role') == $role ? 'selected' : '' }}>{{ ucfirst($role) }}</option>
                             @endforeach
                         </select>
+                        @endif
 
                         <select name="year" class="form-control border bg-light custom-select-minimal" style="border-radius: 10px; font-size: 0.85rem; width: 110px; height: 40px; border-color: #e5e7eb !important;" onchange="this.form.submit()">
                             <option value="">All Years</option>

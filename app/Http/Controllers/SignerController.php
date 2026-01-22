@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Signer;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SignerController extends Controller
@@ -25,12 +26,29 @@ class SignerController extends Controller
         $this->authorize('create', Signer::class);
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username',
             'role' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
-        Signer::create($validated);
+        // Create user account for signer
+        $user = User::create([
+            'name' => $validated['name'],
+            'username' => $validated['username'],
+            'email' => $validated['email'],
+            'role' => 'signer',
+            'password' => bcrypt($validated['password']),
+        ]);
 
-        return redirect()->route('signer.index')->with('success', 'Signer created successfully.');
+        // Create signer record linked to user
+        Signer::create([
+            'name' => $validated['name'],
+            'role' => $validated['role'],
+            'user_id' => $user->id,
+        ]);
+
+        return redirect()->route('signer.index')->with('success', 'Signer account created successfully.');
     }
 
     public function edit(Signer $signer)
@@ -44,12 +62,33 @@ class SignerController extends Controller
         $this->authorize('update', $signer);
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username,' . $signer->user_id,
             'role' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $signer->user_id,
+            'password' => 'nullable|string|min:8|confirmed',
         ]);
 
-        $signer->update($validated);
+        // Update signer record
+        $signer->update([
+            'name' => $validated['name'],
+            'role' => $validated['role'],
+        ]);
 
-        return redirect()->route('signer.index')->with('success', 'Signer updated successfully.');
+        // Update user account
+        $userData = [
+            'name' => $validated['name'],
+            'username' => $validated['username'],
+            'email' => $validated['email'],
+        ];
+
+        // Only update password if provided
+        if (!empty($validated['password'])) {
+            $userData['password'] = bcrypt($validated['password']);
+        }
+
+        $signer->user->update($userData);
+
+        return redirect()->route('signer.index')->with('success', 'Signer account updated successfully.');
     }
 
     public function destroy(Signer $signer)

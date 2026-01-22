@@ -43,9 +43,9 @@
                     @csrf
 
                     <div class="form-group mb-4">
-                        <label for="email" class="small font-weight-bold text-dark">Email</label>
-                        <input id="email" type="email" class="form-control modern-input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Input your email">
-                        @error('email')
+                        <label for="login" class="small font-weight-bold text-dark">Email or Username</label>
+                        <input id="login" type="text" class="form-control modern-input @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="username" autofocus placeholder="Input your email or username">
+                        @error('login')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

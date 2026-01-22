@@ -9,7 +9,12 @@ class Signer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'role'];
+    protected $fillable = ['name', 'role', 'user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function documents()
     {

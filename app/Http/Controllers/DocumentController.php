@@ -20,7 +20,24 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 class DocumentController extends Controller {
     
     public function dashboard(Request $request) {
-        $query = Auth::user()->documents();
+        $user = Auth::user();
+        
+        // Determine base query based on role
+        if ($user->role === 'admin') {
+            // Admin sees everything
+            $query = Document::query();
+        } elseif ($user->role === 'signer') {
+            // Signer only sees documents they signed
+            $signer = $user->signer;
+            if ($signer) {
+                $query = Document::where('signer_id', $signer->id);
+            } else {
+                $query = Document::whereRaw('1 = 0');
+            }
+        } else {
+            // Other roles (Director, Kaur, etc.) see documents they uploaded
+            $query = $user->documents();
+        }
 
         if ($request->filled('role')) {
             $query->where('role', $request->role);
@@ -31,20 +48,37 @@ class DocumentController extends Controller {
         }
 
         if ($request->filled('search')) {
-            $query->where('file_name', 'like', '%' . $request->search . '%')
-                  ->orWhere('document_number', 'like', '%' . $request->search . '%');
+            $query->where(function($q) use ($request) {
+                $q->where('file_name', 'like', '%' . $request->search . '%')
+                  ->orWhere('document_number', 'like', '%' . $request->search . '%')
+                  ->orWhere('perihal', 'like', '%' . $request->search . '%');
+            });
         }
 
         $documents = $query->latest()->paginate(10);
         
-        $roles = Auth::user()->documents()->distinct()->pluck('role');
-        $years = Auth::user()->documents()->selectRaw('YEAR(created_at) as year')->distinct()->pluck('year')->sortDesc();
+        // Get roles and years for filters based on the same base query logic
+        if ($user->role === 'admin') {
+            $roles = Document::distinct()->pluck('role');
+            $years = Document::selectRaw('YEAR(created_at) as year')->distinct()->pluck('year')->sortDesc();
+        } elseif ($user->role === 'signer' && $user->signer) {
+            $roles = Document::where('signer_id', $user->signer->id)->distinct()->pluck('role');
+            $years = Document::where('signer_id', $user->signer->id)->selectRaw('YEAR(created_at) as year')->distinct()->pluck('year')->sortDesc();
+        } else {
+            $roles = $user->documents()->distinct()->pluck('role');
+            $years = $user->documents()->selectRaw('YEAR(created_at) as year')->distinct()->pluck('year')->sortDesc();
+        }
 
         return view('dashboard', compact('documents', 'roles', 'years'));
     }
     
     public function create() {
-        $signers = Signer::all();
+        if (Auth::user()->role === 'admin') {
+            $signers = Signer::all();
+        } else {
+            // For non-admins, only show signers that have a linked user account
+            $signers = Signer::whereNotNull('user_id')->get();
+        }
         return view('document.create', compact('signers'));
     }
     
@@ -54,23 +88,35 @@ class DocumentController extends Controller {
     }
     
     public function upload(Request $request) {
+        $user = Auth::user();
+        
         $validated = $request->validate([
             'pdf_file' => 'required|mimes:pdf|max:20480',
-            'signer_id' => 'required|exists:signers,id',
+            'signer_id' => $user->role === 'admin' ? 'required|exists:signers,id' : 'nullable',
             'document_number' => 'required|string|max:255',
             'perihal' => 'required|string|max:255',
         ]);
         
+        // If not admin, force signer_id to be the user's linked signer
+        if ($user->role !== 'admin') {
+            if (!$user->signer) {
+                return back()->withErrors(['signer_id' => 'Your account is not linked to a signer record.']);
+            }
+            $signerId = $user->signer->id;
+        } else {
+            $signerId = $validated['signer_id'];
+        }
+
         $file = $request->file('pdf_file');
         $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $extension = $file->getClientOriginalExtension();
         $safeName = \Illuminate\Support\Str::slug($originalName) . '_' . time() . '.' . $extension;
         $path = $file->storeAs('pdfs', $safeName, 'public');
         
-        $signer = Signer::find($validated['signer_id']);
+        $signer = Signer::findOrFail($signerId);
         
         $document = Document::create([
-            'user_id' => Auth::id(),
+            'user_id' => $user->id,
             'signer_id' => $signer->id,
             'file_name' => $file->getClientOriginalName(),
             'document_number' => $validated['document_number'],

@@ -31,7 +31,7 @@ class DocumentPolicy
     public function view(User $user, Document $document)
     {
         // Owner can view, or administrative roles can view all
-        return $user->id === $document->user_id || in_array($user->role, ['director', 'kaur', 'approver']);
+        return $user->id === $document->user_id || in_array($user->role, ['admin', 'director', 'kaur', 'approver']);
     }
 
     /**
@@ -55,7 +55,7 @@ class DocumentPolicy
     public function update(User $user, Document $document)
     {
         // Owner can update, or administrative roles can update all
-        return $user->id === $document->user_id || in_array($user->role, ['director', 'kaur', 'approver']);
+        return $user->id === $document->user_id || in_array($user->role, ['admin', 'director', 'kaur', 'approver']);
     }
 
     /**
@@ -67,7 +67,7 @@ class DocumentPolicy
      */
     public function delete(User $user, Document $document)
     {
-        return $user->id === $document->user_id;
+        return $user->id === $document->user_id || $user->role === 'admin';
     }
 
     /**
