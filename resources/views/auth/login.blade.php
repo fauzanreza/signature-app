@@ -10,14 +10,14 @@
                 <div class="logo-wrapper mb-4 d-flex justify-content-center">
                     <img src="{{ asset('images/logo-qr.png') }}" alt="Logo" class="img-fluid" style="height: 60px; filter: brightness(0) invert(1);">
                 </div>
-                <h1 class="text-white font-weight-bold display-4 mb-3">Digital Signature</h1>
+                <h1 class="text-white fw-bold display-4 mb-3">Digital Signature</h1>
                 <p class="text-white-50 lead mx-auto" style="max-width: 450px;">The most secure and efficient way to manage and sign your professional documents digitally.</p>
             </div>
             
             <div class="social-connect mt-4">
                 <div class="d-flex align-items-center justify-content-center mb-4">
                     <div style="height: 1px; width: 50px; background: rgba(255,255,255,0.2);"></div>
-                    <span class="text-white mx-3 small text-uppercase font-weight-bold" style="letter-spacing: 3px;">Connect With Us</span>
+                    <span class="text-white mx-3 small text-uppercase fw-bold" style="letter-spacing: 3px;">Connect With Us</span>
                     <div style="height: 1px; width: 50px; background: rgba(255,255,255,0.2);"></div>
                 </div>
                 <div class="social-media-list d-flex align-items-center justify-content-center">
@@ -35,7 +35,7 @@
         <div class="login-card shadow-2xl">
             <div class="card-body p-5">
                 <div class="mb-5">
-                    <h2 class="font-weight-bold text-dark mb-2">Welcome Back!</h2>
+                    <h2 class="fw-bold text-dark mb-2">Welcome Back!</h2>
                     <p class="text-muted">Log in to start managing your documents with ease.</p>
                 </div>
 
@@ -43,7 +43,7 @@
                     @csrf
 
                     <div class="form-group mb-4">
-                        <label for="login" class="small font-weight-bold text-dark">Email or Username</label>
+                        <label for="login" class="small fw-bold text-dark">Email or Username</label>
                         <input id="login" type="text" class="form-control modern-input @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="username" autofocus placeholder="Input your email or username">
                         @error('login')
                             <span class="invalid-feedback" role="alert">
@@ -53,7 +53,7 @@
                     </div>
 
                     <div class="form-group mb-4">
-                        <label for="password" class="small font-weight-bold text-dark">Password</label>
+                        <label for="password" class="small fw-bold text-dark">Password</label>
                         <div class="position-relative">
                             <input id="password" type="password" class="form-control modern-input @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Input your password">
                             <span class="password-toggle">
@@ -68,18 +68,18 @@
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                            <label class="custom-control-label small text-muted" for="remember">Remember Me</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                            <label class="form-check-label small text-muted" for="remember">Remember Me</label>
                         </div>
                         @if (Route::has('password.request'))
-                            <a class="small font-weight-bold text-primary" href="{{ route('password.request') }}">
+                            <a class="small fw-bold text-primary" href="{{ route('password.request') }}">
                                 Forgot Password?
                             </a>
                         @endif
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block btn-modern py-3 font-weight-bold mb-4">
+                    <button type="submit" class="btn btn-primary w-100 btn-modern py-3 fw-bold mb-4">
                         Login
                     </button>
 
@@ -89,7 +89,7 @@
                 <!-- <div class="text-center mt-5">
                     <p class="text-muted small">
                         Don't have an account? 
-                        <a href="{{ route('register') }}" class="text-primary font-weight-bold ml-1">Sign up here</a>
+                        <a href="{{ route('register') }}" class="text-primary fw-bold ms-1">Sign up here</a>
                     </p>
                 </div> -->
             </div>

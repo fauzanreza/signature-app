@@ -9,53 +9,49 @@ https://fauzanreza.site/ -->
 @section('content')
 <div class="container">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 mb-md-5">
-        <div class="mb-3 mb-md-0 text-center text-md-left">
-            <h2 class="font-weight-bold text-dark mb-1">Dashboard</h2>
+        <div class="mb-3 mb-md-0 text-center text-md-start">
+            <h2 class="fw-bold text-dark mb-1">Dashboard</h2>
             <p class="text-muted mb-0">Manage and track your documents</p>
         </div>
         <div class="d-flex">
             @if(Auth::user()->role === 'admin')
-            <a href="{{ route('signer.index') }}" class="btn btn-sm btn-outline-primary shadow-sm px-3 mr-2">
-                <i class="fas fa-users-cog mr-2"></i> Manage Signers
+            <a href="{{ route('signer.index') }}" class="btn btn-sm btn-outline-primary shadow-sm px-3 me-2">
+                <i class="fas fa-users-cog me-2"></i> Manage Signers
             </a>
             @endif
             <a href="{{ route('document.create') }}" class="btn btn-sm btn-primary shadow-sm px-3">
-                <i class="fas fa-plus-circle mr-2"></i> Upload Document
+                <i class="fas fa-plus-circle me-2"></i> Upload Document
             </a>
         </div>
     </div>
 
     @if (session('status'))
         <div class="alert alert-success alert-dismissible fade show shadow-sm border-0 mb-4" role="alert">
-            <i class="fas fa-check-circle mr-2"></i> {{ session('status') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            <i class="fas fa-check-circle me-2"></i> {{ session('status') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show shadow-sm border-0 mb-4" role="alert">
-            <i class="fas fa-check-circle mr-2"></i> {{ session('success') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
     <div class="card shadow-sm border-0">
         <div class="card-header bg-white border-0 py-4 px-4">
             <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center">
-                <h5 class="mb-3 mb-lg-0 font-weight-bold text-dark"><i class="fas fa-folder-open mr-2 text-primary"></i> Document History</h5>
+                <h5 class="mb-3 mb-lg-0 fw-bold text-dark"><i class="fas fa-folder-open me-2 text-primary"></i> Document History</h5>
                 
                 <form action="{{ route('dashboard') }}" method="GET" class="d-flex flex-column flex-md-row align-items-center w-100 w-lg-auto">
                     @if(request('role') || request('year') || request('search'))
-                        <div class="mb-3 mb-md-0 mr-md-3">
-                            <a href="{{ route('dashboard') }}" class="text-muted small font-weight-bold">Clear Filters</a>
+                        <div class="mb-3 mb-md-0 me-md-3">
+                            <a href="{{ route('dashboard') }}" class="text-muted small fw-bold">Clear Filters</a>
                         </div>
                     @endif
-                    <div class="filter-group d-flex mb-3 mb-md-0 mr-md-3 w-100 w-md-auto justify-content-center">
+                    <div class="filter-group d-flex mb-3 mb-md-0 me-md-3 w-100 w-md-auto justify-content-center">
                         @if(Auth::user()->role === 'admin')
-                        <select name="role" class="form-control border bg-light mr-2 custom-select-minimal" style="border-radius: 10px; font-size: 0.85rem; width: 130px; height: 40px; border-color: #e5e7eb !important;" onchange="this.form.submit()">
+                        <select name="role" class="form-select border bg-light me-2 custom-select-minimal" style="border-radius: 10px; font-size: 0.85rem; width: 130px; height: 40px; border-color: #e5e7eb !important;" onchange="this.form.submit()">
                             <option value="">All Roles</option>
                             @foreach($roles as $role)
                                 <option value="{{ $role }}" {{ request('role') == $role ? 'selected' : '' }}>{{ ucfirst($role) }}</option>
@@ -63,7 +59,7 @@ https://fauzanreza.site/ -->
                         </select>
                         @endif
 
-                        <select name="year" class="form-control border bg-light custom-select-minimal" style="border-radius: 10px; font-size: 0.85rem; width: 110px; height: 40px; border-color: #e5e7eb !important;" onchange="this.form.submit()">
+                        <select name="year" class="form-select border bg-light custom-select-minimal" style="border-radius: 10px; font-size: 0.85rem; width: 110px; height: 40px; border-color: #e5e7eb !important;" onchange="this.form.submit()">
                             <option value="">All Years</option>
                             @foreach($years as $year)
                                 <option value="{{ $year }}" {{ request('year') == $year ? 'selected' : '' }}>{{ $year }}</option>
@@ -73,7 +69,7 @@ https://fauzanreza.site/ -->
 
                     <div class="search-wrapper w-100" style="position: relative; max-width: 300px;">
                         <i class="fas fa-search text-muted" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); z-index: 10;"></i>
-                        <input type="text" name="search" class="form-control border bg-light pl-5" placeholder="Search documents..." value="{{ request('search') }}" style="border-radius: 12px; font-size: 0.9rem; height: 40px; box-shadow: none; border-color: #e5e7eb !important;">
+                        <input type="text" name="search" class="form-control border bg-light ps-5" placeholder="Search documents..." value="{{ request('search') }}" style="border-radius: 12px; font-size: 0.9rem; height: 40px; box-shadow: none; border-color: #e5e7eb !important;">
                     </div>
                 </form>
             </div>
@@ -84,25 +80,25 @@ https://fauzanreza.site/ -->
                     <table class="table table-hover mb-0">
                         <thead class="bg-light">
                             <tr>
-                                <th class="border-top-0 pl-4 py-3 text-muted small font-weight-bold text-uppercase">ID</th>
-                                <th class="border-top-0 py-3 text-muted small font-weight-bold text-uppercase">File Name</th>
-                                <th class="border-top-0 py-3 text-muted small font-weight-bold text-uppercase">Role</th>
-                                <th class="border-top-0 py-3 text-muted small font-weight-bold text-uppercase">Status</th>
-                                <th class="border-top-0 py-3 text-muted small font-weight-bold text-uppercase">Date</th>
-                                <th class="border-top-0 py-3 text-center text-muted small font-weight-bold text-uppercase">Actions</th>
+                                <th class="border-top-0 ps-4 py-3 text-muted small fw-bold text-uppercase">ID</th>
+                                <th class="border-top-0 py-3 text-muted small fw-bold text-uppercase">File Name</th>
+                                <th class="border-top-0 py-3 text-muted small fw-bold text-uppercase">Role</th>
+                                <th class="border-top-0 py-3 text-muted small fw-bold text-uppercase">Status</th>
+                                <th class="border-top-0 py-3 text-muted small fw-bold text-uppercase">Date</th>
+                                <th class="border-top-0 py-3 text-center text-muted small fw-bold text-uppercase">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($documents as $doc)
                                 <tr>
-                                    <td class="pl-4 align-middle font-weight-bold text-muted">#{{ $doc->id }}</td>
+                                    <td class="ps-4 align-middle fw-bold text-muted">#{{ $doc->id }}</td>
                                     <td class="align-middle">
                                         <div class="d-flex align-items-center">
-                                            <div class="bg-light rounded p-2 mr-3 text-danger">
+                                            <div class="bg-light rounded p-2 me-3 text-danger">
                                                 <i class="fas fa-file-pdf fa-lg"></i>
                                             </div>
                                             <div class="d-flex flex-column">
-                                                <span class="font-weight-medium text-dark">{{ $doc->file_name }}</span>
+                                                <span class="fw-medium text-dark">{{ $doc->file_name }}</span>
                                                 @if($doc->document_number)
                                                     <small class="text-muted">{{ $doc->document_number }}</small>
                                                 @endif
@@ -112,14 +108,14 @@ https://fauzanreza.site/ -->
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="align-middle"><span class="badge badge-light border px-2 py-1">{{ ucfirst($doc->role) }}</span></td>
+                                    <td class="align-middle"><span class="badge bg-light text-dark border px-2 py-1">{{ ucfirst($doc->role) }}</span></td>
                                     <td class="align-middle">
                                         @if($doc->status == 'signed')
-                                            <span class="badge badge-success px-2 py-1"><i class="fas fa-check-circle mr-1"></i> Signed</span>
+                                            <span class="badge bg-success px-2 py-1"><i class="fas fa-check-circle me-1"></i> Signed</span>
                                         @elseif($doc->status == 'pending')
-                                            <span class="badge badge-warning px-2 py-1"><i class="fas fa-clock mr-1"></i> Pending</span>
+                                            <span class="badge bg-warning text-dark px-2 py-1"><i class="fas fa-clock me-1"></i> Pending</span>
                                         @else
-                                            <span class="badge badge-secondary px-2 py-1">{{ ucfirst($doc->status) }}</span>
+                                            <span class="badge bg-secondary px-2 py-1">{{ ucfirst($doc->status) }}</span>
                                         @endif
                                     </td>
                                     <td class="align-middle text-muted small">
@@ -128,7 +124,7 @@ https://fauzanreza.site/ -->
                                     <td class="text-center align-middle">
                                         @if($doc->status == 'pending')
                                             <div class="d-flex justify-content-center align-items-center">
-                                                <a href="{{ route('document.position', $doc->id) }}" class="btn btn-sm btn-outline-primary shadow-sm py-1 px-2 mr-2" style="font-size: 0.75rem;" title="Position QR">
+                                                <a href="{{ route('document.position', $doc->id) }}" class="btn btn-sm btn-outline-primary shadow-sm py-1 px-2 me-2" style="font-size: 0.75rem;" title="Position QR">
                                                     Position QR
                                                 </a>
                                                 <form action="{{ route('document.destroy', $doc->id) }}" method="POST" data-confirm="Are you sure you want to delete this document? This will permanently remove the file." data-confirm-title="Delete Document">
@@ -160,7 +156,7 @@ https://fauzanreza.site/ -->
                             <i class="fas fa-folder-open fa-3x text-muted opacity-50"></i>
                         </div>
                     </div>
-                    <h5 class="text-dark font-weight-bold">No documents found</h5>
+                    <h5 class="text-dark fw-bold">No documents found</h5>
                     <p class="text-muted mb-4">
                         @if(request('role') || request('year') || request('search'))
                             No documents match your current filters.

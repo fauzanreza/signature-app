@@ -20,8 +20,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <!-- Bootstrap 4 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- Bootstrap 5 CSS (Compiled) -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Custom Styles -->
     <style>
@@ -129,9 +129,9 @@
         .bg-primary { background-color: var(--primary-color) !important; }
         
         /* Badges */
-        .badge-success { background-color: #059669; }
-        .badge-warning { background-color: #d97706; color: white; }
-        .badge-secondary { background-color: #6b7280; }
+        .bg-success { background-color: #059669 !important; }
+        .bg-warning { background-color: #d97706 !important; color: white !important; }
+        .bg-secondary { background-color: #6b7280 !important; }
         
         /* Auth Page Specifics */
         .auth-layout {
@@ -160,19 +160,19 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ Auth::check() ? route('dashboard') : url('/') }}">
-                    <img src="{{ asset('images/logo-qr.png') }}" alt="Logo" class="mr-2" style="height: 40px; width: auto;">
+                    <img src="{{ asset('images/logo-qr.png') }}" alt="Logo" class="me-2" style="height: 40px; width: auto;">
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav me-auto">
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -188,20 +188,20 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <div class="d-inline-flex align-items-center">
-                                        <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mr-2" style="width: 32px; height: 32px; color: var(--primary-color);">
+                                        <div class="bg-light rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px; color: var(--primary-color);">
                                             <i class="fas fa-user"></i>
                                         </div>
                                         {{ Auth::user()->name }}
                                     </div>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right border-0 shadow-lg" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-end border-0 shadow-lg" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item py-2" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        <i class="fas fa-sign-out-alt mr-2 text-muted"></i> {{ __('Logout') }}
+                                        <i class="fas fa-sign-out-alt me-2 text-muted"></i> {{ __('Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -231,11 +231,11 @@
                             <i class="fas fa-exclamation-triangle fa-2x text-warning"></i>
                         </div>
                     </div>
-                    <h4 class="font-weight-bold text-dark mb-2" id="confirmModalTitle">Are you sure?</h4>
+                    <h4 class="fw-bold text-dark mb-2" id="confirmModalTitle">Are you sure?</h4>
                     <p class="text-muted mb-4" id="confirmModalMessage">This action cannot be undone.</p>
                     <div class="d-flex justify-content-center">
-                        <button type="button" class="btn btn-light px-4 mr-2 font-weight-bold" data-dismiss="modal" style="border-radius: 10px;">Cancel</button>
-                        <button type="button" class="btn btn-danger px-4 font-weight-bold" id="confirmModalAction" style="border-radius: 10px;">Confirm Delete</button>
+                        <button type="button" class="btn btn-light px-4 me-2 fw-bold" data-bs-dismiss="modal" style="border-radius: 10px;">Cancel</button>
+                        <button type="button" class="btn btn-danger px-4 fw-bold" id="confirmModalAction" style="border-radius: 10px;">Confirm Delete</button>
                     </div>
                 </div>
             </div>
@@ -244,14 +244,14 @@
     
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
         function confirmAction(options) {
             const modal = $('#confirmModal');
             $('#confirmModalTitle').text(options.title || 'Are you sure?');
             $('#confirmModalMessage').text(options.message || 'This action cannot be undone.');
-            $('#confirmModalAction').text(options.confirmText || 'Confirm').removeClass().addClass('btn px-4 font-weight-bold ' + (options.confirmClass || 'btn-danger'));
+            $('#confirmModalAction').text(options.confirmText || 'Confirm').removeClass().addClass('btn px-4 fw-bold ' + (options.confirmClass || 'btn-danger'));
             
             $('#confirmModalAction').off('click').on('click', function() {
                 options.onConfirm();

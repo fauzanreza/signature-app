@@ -68,9 +68,9 @@ input[type=number] {
 
 <div class="container-fluid">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
-        <h2 class="font-weight-bold text-dark mb-3 mb-md-0">Position QR Code</h2>
-        <a href="{{ route('dashboard') }}" class="btn btn-light text-muted font-weight-bold shadow-sm w-100 w-md-auto">
-            <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+        <h2 class="fw-bold text-dark mb-3 mb-md-0">Position QR Code</h2>
+        <a href="{{ route('dashboard') }}" class="btn btn-light text-muted fw-bold shadow-sm w-100 w-md-auto">
+            <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
         </a>
     </div>
     
@@ -86,9 +86,9 @@ input[type=number] {
                                 <i class="fas fa-chevron-left"></i>
                             </button>
                             <div class="d-flex align-items-center mx-2">
-                                <span class="small mr-2 text-muted">Page</span>
-                                <input type="number" id="pageInput" class="form-control form-control-sm text-center font-weight-bold px-1" value="1" min="1" style="width: 50px; border-radius: 6px;">
-                                <span class="small ml-2 text-muted" id="totalPagesInfo">of 1</span>
+                                <span class="small me-2 text-muted">Page</span>
+                                <input type="number" id="pageInput" class="form-control form-control-sm text-center fw-bold px-1" value="1" min="1" style="width: 50px; border-radius: 6px;">
+                                <span class="small ms-2 text-muted" id="totalPagesInfo">of 1</span>
                             </div>
                             <button type="button" class="btn btn-sm btn-outline-secondary" id="nextPage">
                                 <i class="fas fa-chevron-right"></i>
@@ -101,10 +101,8 @@ input[type=number] {
                                 <i class="fas fa-search-minus"></i>
                             </button>
                             <div class="input-group input-group-sm mx-2" style="width: 90px;">
-                                <input type="number" id="zoomInput" class="form-control text-center font-weight-bold px-1" value="100" min="50" max="200" style="border-radius: 6px 0 0 6px;">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-white small px-2" style="border-radius: 0 6px 6px 0;">%</span>
-                                </div>
+                                <input type="number" id="zoomInput" class="form-control text-center fw-bold px-1" value="100" min="50" max="200" style="border-radius: 6px 0 0 6px;">
+                                <span class="input-group-text bg-white small px-2" style="border-radius: 0 6px 6px 0;">%</span>
                             </div>
                             <button type="button" class="btn btn-sm btn-outline-secondary" id="zoomIn">
                                 <i class="fas fa-search-plus"></i>
@@ -119,7 +117,7 @@ input[type=number] {
                         <div class="document-placeholder">
                             <div class="text-center">
                                 <div class="spinner-border text-primary mb-3" role="status">
-                                    <span class="sr-only">Loading...</span>
+                                    <span class="visually-hidden">Loading...</span>
                                 </div>
                                 <p class="text-muted">Loading PDF...</p>
                             </div>
@@ -132,40 +130,38 @@ input[type=number] {
         <div class="col-md-3">
             <div class="card shadow border-0 sticky-top" style="top: 20px;">
                 <div class="card-header bg-white border-bottom py-3">
-                    <h5 class="mb-0 font-weight-bold text-primary"><i class="fas fa-sliders-h mr-2"></i> QR Position</h5>
+                    <h5 class="mb-0 fw-bold text-primary"><i class="fas fa-sliders-h me-2"></i> QR Position</h5>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label class="font-weight-bold text-dark mb-3">
-                            <i class="fas fa-arrows-h mr-2"></i>Horizontal (X)
+                        <label class="fw-bold text-dark mb-3">
+                            <i class="fas fa-arrows-h me-2"></i>Horizontal (X)
                         </label>
-                        <input type="range" class="custom-range" min="0" max="100" value="80" id="qrXPosition">
+                        <input type="range" class="form-range" min="0" max="100" value="80" id="qrXPosition">
                         <div class="text-center mt-2">
-                            <span class="font-weight-bold text-primary" id="xPositionValue">80%</span>
+                            <span class="fw-bold text-primary" id="xPositionValue">80%</span>
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label class="font-weight-bold text-dark mb-3">
-                            <i class="fas fa-arrows-v mr-2"></i>Vertical (Y)
+                        <label class="fw-bold text-dark mb-3">
+                            <i class="fas fa-arrows-v me-2"></i>Vertical (Y)
                         </label>
-                        <input type="range" class="custom-range" min="0" max="100" value="80" id="qrYPosition">
+                        <input type="range" class="form-range" min="0" max="100" value="80" id="qrYPosition">
                         <div class="text-center mt-2">
-                            <span class="font-weight-bold text-primary" id="yPositionValue">80%</span>
+                            <span class="fw-bold text-primary" id="yPositionValue">80%</span>
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label class="font-weight-bold text-dark mb-3">
-                            <i class="fas fa-expand mr-2"></i>QR Size
+                        <label class="fw-bold text-dark mb-3">
+                            <i class="fas fa-expand me-2"></i>QR Size
                         </label>
                         <div class="d-flex align-items-center">
-                            <input type="range" class="custom-range mr-3" min="30" max="200" value="50" id="qrSize">
+                            <input type="range" class="form-range me-3" min="30" max="200" value="50" id="qrSize">
                             <div class="input-group input-group-sm" style="width: 95px;">
-                                <input type="number" id="qrSizeInput" class="form-control text-center font-weight-bold text-primary border-primary px-1" value="50" min="30" max="200" style="border-radius: 8px 0 0 8px; height: 31px;">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-white border-primary text-primary small px-2" style="border-radius: 0 8px 8px 0; font-size: 0.7rem; height: 31px;">px</span>
-                                </div>
+                                <input type="number" id="qrSizeInput" class="form-control text-center fw-bold text-primary border-primary px-1" value="50" min="30" max="200" style="border-radius: 8px 0 0 8px; height: 31px;">
+                                <span class="input-group-text bg-white border-primary text-primary small px-2" style="border-radius: 0 8px 8px 0; font-size: 0.7rem; height: 31px;">px</span>
                             </div>
                         </div>
                     </div>
@@ -174,8 +170,8 @@ input[type=number] {
                     
 
                     <div class="text-center">
-                        <button class="btn btn-sm btn-primary shadow-sm px-4 py-2 font-weight-bold" id="generateQr" style="border-radius: 8px;">
-                            <i class="fas fa-stamp mr-2"></i> Stamp Document
+                        <button class="btn btn-sm btn-primary shadow-sm px-4 py-2 fw-bold" id="generateQr" style="border-radius: 8px;">
+                            <i class="fas fa-stamp me-2"></i> Stamp Document
                         </button>
                     </div>
                 </div>
@@ -468,7 +464,7 @@ input[type=number] {
             onConfirm: async function() {
                 const btn = document.getElementById('generateQr');
                 const originalText = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processing...';
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Processing...';
                 btn.disabled = true;
                 
                 try {

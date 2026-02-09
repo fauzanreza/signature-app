@@ -10,52 +10,52 @@
                         <div class="text-success mb-3">
                             <i class="fas fa-check-circle fa-4x"></i>
                         </div>
-                        <h2 class="font-weight-bold text-dark mb-1">Document Verified</h2>
+                        <h2 class="fw-bold text-dark mb-1">Document Verified</h2>
                         <p class="text-muted">This document is authentic and the digital signature is valid.</p>
                     </div>
 
                     <div class="document-details bg-light rounded-xl p-3 p-md-4 mb-4 mb-md-5" style="border-radius: 16px;">
-                        <h5 class="font-weight-bold mb-4 text-dark border-bottom pb-3">
-                            <i class="fas fa-info-circle mr-2 text-primary"></i> Document Details
+                        <h5 class="fw-bold mb-4 text-dark border-bottom pb-3">
+                            <i class="fas fa-info-circle me-2 text-primary"></i> Document Details
                         </h5>
                         
                         <div class="detail-row mb-3 d-flex flex-wrap">
-                            <div class="col-12 col-sm-4 text-muted font-weight-bold px-0 mb-1 mb-sm-0">Nomor Surat:</div>
-                            <div class="col-12 col-sm-8 text-dark px-0 font-weight-bold">{{ $document->document_number ?? 'N/A' }}</div>
+                            <div class="col-12 col-sm-4 text-muted fw-bold px-0 mb-1 mb-sm-0">Nomor Surat:</div>
+                            <div class="col-12 col-sm-8 text-dark px-0 fw-bold">{{ $document->document_number ?? 'N/A' }}</div>
                         </div>
 
                         <div class="detail-row mb-3 d-flex flex-wrap">
-                            <div class="col-12 col-sm-4 text-muted font-weight-bold px-0 mb-1 mb-sm-0">Perihal:</div>
-                            <div class="col-12 col-sm-8 text-dark px-0 font-weight-bold">{{ $document->perihal ?? 'N/A' }}</div>
+                            <div class="col-12 col-sm-4 text-muted fw-bold px-0 mb-1 mb-sm-0">Perihal:</div>
+                            <div class="col-12 col-sm-8 text-dark px-0 fw-bold">{{ $document->perihal ?? 'N/A' }}</div>
                         </div>
 
                         <div class="detail-row mb-3 d-flex flex-wrap">
-                            <div class="col-12 col-sm-4 text-muted font-weight-bold px-0 mb-1 mb-sm-0">File Name:</div>
+                            <div class="col-12 col-sm-4 text-muted fw-bold px-0 mb-1 mb-sm-0">File Name:</div>
                             <div class="col-12 col-sm-8 text-dark px-0">{{ $document->file_name }}</div>
                         </div>
 
                         <div class="detail-row mb-3 d-flex flex-wrap">
-                            <div class="col-12 col-sm-4 text-muted font-weight-bold px-0 mb-1 mb-sm-0">Signer Name:</div>
-                            <div class="col-12 col-sm-8 text-dark px-0 font-weight-bold text-primary">{{ $document->signer ? $document->signer->name : 'N/A' }}</div>
+                            <div class="col-12 col-sm-4 text-muted fw-bold px-0 mb-1 mb-sm-0">Signer Name:</div>
+                            <div class="col-12 col-sm-8 text-dark px-0 fw-bold text-primary">{{ $document->signer ? $document->signer->name : 'N/A' }}</div>
                         </div>
 
                         <div class="detail-row mb-3 d-flex flex-wrap align-items-center">
-                            <div class="col-12 col-sm-4 text-muted font-weight-bold px-0 mb-1 mb-sm-0">Signer Role:</div>
+                            <div class="col-12 col-sm-4 text-muted fw-bold px-0 mb-1 mb-sm-0">Signer Role:</div>
                             <div class="col-12 col-sm-8 px-0">
-                                <span class="badge bg-primary text-white px-3 py-2 text-wrap text-left" style="border-radius: 6px; font-size: 0.85rem; line-height: 1.4; max-width: 100%;">{{ $document->role }}</span>
+                                <span class="badge bg-primary text-white px-3 py-2 text-wrap text-start" style="border-radius: 6px; font-size: 0.85rem; line-height: 1.4; max-width: 100%;">{{ $document->role }}</span>
                             </div>
                         </div>
 
                         <div class="detail-row mb-3 d-flex flex-wrap">
-                            <div class="col-12 col-sm-4 text-muted font-weight-bold px-0 mb-1 mb-sm-0">Signed At:</div>
-                            <div class="col-12 col-sm-8 text-dark px-0 font-italic">{{ $document->updated_at->timezone('Asia/Jakarta')->format('l, d F Y - H:i:s') }}</div>
+                            <div class="col-12 col-sm-4 text-muted fw-bold px-0 mb-1 mb-sm-0">Signed At:</div>
+                            <div class="col-12 col-sm-8 text-dark px-0 fst-italic">{{ $document->updated_at->timezone('Asia/Jakarta')->format('l, d F Y - H:i:s') }}</div>
                         </div>
 
                         <div class="detail-row mb-0 d-flex flex-wrap">
-                            <div class="col-12 col-sm-4 text-muted font-weight-bold px-0 mb-1 mb-sm-0">Verification Status:</div>
+                            <div class="col-12 col-sm-4 text-muted fw-bold px-0 mb-1 mb-sm-0">Verification Status:</div>
                             <div class="col-12 col-sm-8 px-0">
-                                <span class="text-success font-weight-bold">
-                                    <i class="fas fa-check-double mr-1"></i> Authentic & Valid
+                                <span class="text-success fw-bold">
+                                    <i class="fas fa-check-double me-1"></i> Authentic & Valid
                                 </span>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
 
                     <div class="text-center border-top pt-4">
                         <p class="small text-muted mb-1">Verification ID</p>
-                        <code class="bg-light px-3 py-2 rounded text-primary font-weight-bold">{{ request('uuid') ?? 'N/A' }}</code>
+                        <code class="bg-light px-3 py-2 rounded text-primary fw-bold">{{ request('uuid') ?? 'N/A' }}</code>
                     </div>
                 </div>
             </div>

@@ -3,18 +3,16 @@
 @section('content')
 <div class="container">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
-        <h2 class="font-weight-bold text-dark mb-3 mb-md-0">Manage Signers</h2>
+        <h2 class="fw-bold text-dark mb-3 mb-md-0">Manage Signers</h2>
         <a href="{{ route('signer.create') }}" class="btn btn-sm btn-primary shadow-sm px-3 w-100 w-md-auto">
-            <i class="fas fa-plus mr-2"></i> Add New Signer
+            <i class="fas fa-plus me-2"></i> Add New Signer
         </a>
     </div>
 
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4" role="alert" style="border-radius: 12px;">
-            <i class="fas fa-check-circle mr-2"></i> {{ session('success') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
@@ -28,23 +26,23 @@
                             <th class="border-0 px-4 py-3">Role</th>
                             <th class="border-0 px-4 py-3">Email</th>
                             <th class="border-0 px-4 py-3">Created At</th>
-                            <th class="border-0 px-4 py-3 text-right">Actions</th>
+                            <th class="border-0 px-4 py-3 text-end">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($signers as $signer)
                             <tr>
-                                <td class="px-4 py-3 font-weight-bold text-dark">{{ $signer->name }}</td>
+                                <td class="px-4 py-3 fw-bold text-dark">{{ $signer->name }}</td>
                                 <td class="px-4 py-3">
-                                    <span class="badge badge-light text-primary px-3 py-2" style="border-radius: 8px;">
+                                    <span class="badge bg-light text-primary px-3 py-2" style="border-radius: 8px;">
                                         {{ $signer->role }}
                                     </span>
                                 </td>
                                 <td class="px-4 py-3 text-muted">{{ $signer->user->email ?? 'N/A' }}</td>
                                 <td class="px-4 py-3 text-muted">{{ $signer->created_at->format('M d, Y') }}</td>
-                                <td class="px-4 py-3 text-right">
+                                <td class="px-4 py-3 text-end">
                                     <div class="btn-group">
-                                        <a href="{{ route('signer.edit', $signer) }}" class="btn btn-sm btn-outline-primary mr-2" style="border-radius: 8px;">
+                                        <a href="{{ route('signer.edit', $signer) }}" class="btn btn-sm btn-outline-primary me-2" style="border-radius: 8px;">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <form action="{{ route('signer.destroy', $signer) }}" method="POST" data-confirm="Are you sure you want to delete this signer? This may affect documents assigned to them." data-confirm-title="Delete Signer">
